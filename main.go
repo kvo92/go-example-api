@@ -14,16 +14,18 @@ import (
 // var bindAddress = env.String("BIND_ADDRESS", false, ":9090", "Bind address for the server")
 
 func main() {
+
 	l := log.New(os.Stdout, "product-api", log.LstdFlags)
 
-	helloHandler := handlers.NewHello(l)
-	goodbyeHandler := handlers.NewGoodbye(l)
+	// helloHandler := handlers.NewHello(l)
+	// goodbyeHandler := handlers.NewGoodbye(l)
+	productHandler := handlers.NewProducts(l)
 
 	sm := http.NewServeMux()
 
-	sm.Handle("/", helloHandler)
-	sm.Handle("/goodbye", goodbyeHandler)
-
+	// sm.Handle("/", helloHandler)
+	// sm.Handle("/goodbye", goodbyeHandler)
+	sm.Handle("/", productHandler)
 	s := &http.Server{
 		Addr:         ":9090",
 		Handler:      sm,
